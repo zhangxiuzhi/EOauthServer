@@ -1,0 +1,32 @@
+server:
+  port: 9900
+  context-path: /auth
+
+logging:
+  level:
+    root: info
+#    org.springframework.security: debug
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@10.0.1.224:1521:orcl
+    username: shdg
+    password: shdg
+    druid:
+      filter: stat,wall,log4j
+      max-active: 10
+  thymeleaf:
+    mode: HTML5
+    cache: false
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  devtools:
+    livereload:
+      port: 24899
+  jpa:
+    show-sql: true
+  redis:
+    host: 10.0.1.224
+
+restart: false
