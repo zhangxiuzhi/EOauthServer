@@ -7,7 +7,7 @@ spring:
         service-id: CONFIG-SERVER
       profile: default
   application:
-    name: AuthServer
+    name: OauthServer
 eureka:
   client:
     serviceUrl:
