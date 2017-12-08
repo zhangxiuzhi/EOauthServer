@@ -1,4 +1,4 @@
-package com.esteel.oauth;
+package com.esteel.oauth.config;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 

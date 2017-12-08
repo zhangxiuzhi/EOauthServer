@@ -1,4 +1,4 @@
-package com.esteel.oauth;
+package com.esteel.oauth.config;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

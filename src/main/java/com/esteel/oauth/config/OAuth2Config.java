@@ -1,4 +1,4 @@
-package com.esteel.oauth;
+package com.esteel.oauth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -71,7 +71,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     protected JwtAccessTokenConverter jwtTokenEnhancer() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         KeyPair keyPair = new KeyStoreKeyFactory(
-                new ClassPathResource("keystore1.jks"), "123456".toCharArray())
+                new ClassPathResource("keystore.jks"), "123456".toCharArray())
                 .getKeyPair("zxz");
         converter.setKeyPair(keyPair);
 
