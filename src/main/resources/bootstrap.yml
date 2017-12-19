@@ -8,6 +8,8 @@ spring:
       profile: default
   application:
     name: OauthServer
+  thymeleaf:
+    cache: false
 eureka:
   client:
     serviceUrl:
