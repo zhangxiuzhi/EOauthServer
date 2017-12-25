@@ -1,8 +1,11 @@
 package com.esteel.oauth.config;
 
 import com.esteel.oauth.config.auth.ESteelAuthenticationProvider;
+import com.esteel.oauth.config.auth.ESteelLogoutSuccessHandler;
 import com.esteel.oauth.config.auth.ESteelWebAuthenticationDetailsSource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
@@ -26,6 +29,11 @@ import java.io.IOException;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
+    @Bean // share AuthenticationManager for web and oauth
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
 
@@ -37,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/userInfo")
                 .authenticationDetailsSource(new ESteelWebAuthenticationDetailsSource())
                 .permitAll()
+                .and().logout().logoutSuccessHandler(new ESteelLogoutSuccessHandler())
                 .and()
                 .authorizeRequests()
                 .anyRequest()

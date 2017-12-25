@@ -5,6 +5,7 @@ spring:
       discovery:
         enabled: true
         service-id: CONFIG-SERVER
+
   application:
     name: OauthServer
   thymeleaf:

@@ -32,6 +32,7 @@ import java.security.KeyPair;
 @EnableAuthorizationServer
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Autowired
+    @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
 
     @Qualifier("dataSource")
@@ -40,6 +41,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     JedisConnectionFactory jedisConnectionFactory;
+
 
 
     @Override
@@ -61,6 +63,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
                 .refreshTokenValiditySeconds(20)
 
                 .autoApprove("webshop")
+
         ;
 
 //        clients.jdbc(dataSource).clients()
