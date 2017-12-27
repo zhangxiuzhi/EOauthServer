@@ -59,8 +59,8 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
                 .secret("acmesecret")
                 .authorizedGrantTypes("authorization_code", "refresh_token", "implicit", "password", "client_credentials")
                 .scopes("webshop")
-                .accessTokenValiditySeconds(20)
-                .refreshTokenValiditySeconds(20)
+                .accessTokenValiditySeconds(6000)
+                .refreshTokenValiditySeconds(6000)
 
                 .autoApprove("webshop")
 
