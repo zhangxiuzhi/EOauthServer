@@ -1,7 +1,9 @@
 package com.esteel.oauth.config.auth;
 
+import com.ctc.wstx.util.StringUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +20,12 @@ import java.io.IOException;
 public class ESteelLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String target = request.getParameter("target");
+        String target = request.getParameter("_target");
 
-        response.sendRedirect(target);
+        if (!StringUtils.isEmpty(target)) {
+            response.sendRedirect(target);
+        }else{
+            response.sendRedirect("/ulogin");
+        }
     }
 }
