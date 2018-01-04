@@ -3,6 +3,7 @@ package com.esteel.oauth.config;
 import com.esteel.oauth.config.auth.ESteelAuthenticationProvider;
 import com.esteel.oauth.config.auth.ESteelLogoutSuccessHandler;
 import com.esteel.oauth.config.auth.ESteelWebAuthenticationDetailsSource;
+import com.esteel.oauth.config.auth.EsteelLoginUrlAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,14 +39,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-        http.authenticationProvider(new ESteelAuthenticationProvider())
-                .formLogin()
-                .loginPage("/ulogin")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/userInfo")
-                .authenticationDetailsSource(new ESteelWebAuthenticationDetailsSource())
-                .permitAll()
-                .and().logout().logoutSuccessHandler(new ESteelLogoutSuccessHandler())
+       http.authenticationProvider(new ESteelAuthenticationProvider())
+               .formLogin()
+               .and().antMatcher("/**").authorizeRequests().antMatchers("/ulogin").permitAll().anyRequest().authenticated()
+               .and()
+               .exceptionHandling().authenticationEntryPoint(new EsteelLoginUrlAuthenticationEntryPoint("/ulogin"))
+//                .formLogin()
+//                .loginPage("/ulogin")
+//                .loginProcessingUrl("/login")
+//                .defaultSuccessUrl("/userInfo")
+
+//                .authenticationDetailsSource(new ESteelWebAuthenticationDetailsSource())
+//                .permitAll()
+                .and()
+               .logout().logoutSuccessHandler(new ESteelLogoutSuccessHandler())
                 .and()
                 .authorizeRequests()
                 .anyRequest()
